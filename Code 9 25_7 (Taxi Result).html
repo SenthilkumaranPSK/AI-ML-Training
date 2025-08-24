@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fare Estimate Result</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .result-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      width: 400px;
+      color: #222;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .result-container h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #007B7F;
+    }
+
+    .result-container p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #333;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 20px;
+      background-color: #007B7F;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    a.button:hover {
+      background-color: #005c5f;
+    }
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h2>Estimated Taxi Fare</h2>
+    <p>Population: <span class="highlight">{{ population }}</span></p>
+    <p>Monthly Income: ₹<span class="highlight">{{ income }}</span></p>
+    <p>Parking Cost: ₹<span class="highlight">{{ parking }}</span></p>
+    <p>Weekly Riders: <span class="highlight">{{ riders }}</span></p>
+    <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
+    <p><strong>Predicted Weekly Fare:</strong><br> ₹<span class="highlight">{{ prediction }}</span></p>
+    <a href="/" class="button">Estimate Again</a>
+  </div>
+</body>
+</html>

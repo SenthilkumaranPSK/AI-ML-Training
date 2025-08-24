@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Taxi Fare Estimator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 360px;
+    }
+
+    .card h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #222;
+      font-size: 24px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #333;
+      margin-top: 15px;
+      display: block;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #007B7F;
+      color: #fff;
+      font-weight: bold;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005c5f;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #777;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Estimate Your Weekly Taxi Fare</h1>
+    <form action="/predict" method="post">
+      <label for="population">City Population:</label>
+      <input type="number" name="population" placeholder="e.g. 1750000" required>
+
+      <label for="income">Monthly Income (₹):</label>
+      <input type="number" name="income" placeholder="e.g. 9000" required>
+
+      <label for="parking">Avg. Parking Cost (₹):</label>
+      <input type="number" name="parking" placeholder="e.g. 75" required>
+
+      <label for="riders">Weekly Riders:</label>
+      <input type="number" name="riders" placeholder="e.g. 180000" required>
+
+      <button type="submit">Estimate Fare</button>
+    </form>
+  </div>
+</body>
+</html>
