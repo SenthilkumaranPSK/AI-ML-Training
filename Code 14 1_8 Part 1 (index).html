@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spam Detector</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      background: linear-gradient(270deg, #6b73ff, #00c6ff, #000dff, #6b73ff);
+      background-size: 800% 800%;
+      animation: gradientMove 18s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      background: #fff;
+      padding: 2.5rem 3rem;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      animation: fadeIn 0.8s ease forwards;
+    }
+    h2 {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      color: #222;
+      letter-spacing: 1px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    label {
+      font-weight: 500;
+      font-size: 1rem;
+      text-align: left;
+      color: #555;
+    }
+    input[type="text"] {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    input[type="text"]:focus {
+      border-color: #6b73ff;
+      outline: none;
+      box-shadow: 0 0 8px rgba(107, 115, 255, 0.6);
+    }
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+    button {
+      flex: 1;
+      padding: 0.85rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(107, 115, 255, 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      color: white;
+    }
+    button[type="submit"] {
+      background: #6b73ff;
+    }
+    button[type="submit"]:hover {
+      background-color: #545ec8;
+      box-shadow: 0 7px 20px rgba(84, 94, 200, 0.7);
+    }
+    button[type="button"] {
+      background: #d9534f;
+    }
+    button[type="button"]:hover {
+      background-color: #b0302a;
+      box-shadow: 0 7px 20px rgba(176, 48, 42, 0.7);
+    }
+    .prediction {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      word-wrap: break-word;
+    }
+    .spam-label {
+      color: #fff;
+      background: #e53935;
+      border-radius: 8px;
+      padding: 0.3em 0.9em;
+      display: inline-block;
+      letter-spacing: 1px;
+      font-size: 1.15em;
+      box-shadow: 0 3px 8px rgba(229,57,53,0.1);
+      margin-top: 0.5em;
+    }
+    .not-spam-label {
+      color: #fff;
+      background: #26a69a;
+      border-radius: 8px;
+      padding: 0.3em 0.9em;
+      display: inline-block;
+      letter-spacing: 1px;
+      font-size: 1.15em;
+      box-shadow: 0 3px 8px rgba(38,166,154,0.1);
+      margin-top: 0.5em;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 480px) {
+      .container {
+        margin: 1rem;
+        padding: 2rem 1.5rem;
+      }
+      input[type="text"] {
+        font-size: 0.9rem;
+      }
+      button {
+        font-size: 1rem;
+      }
+      .buttons {
+        flex-direction: column;
+      }
+      button {
+        flex: none;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Spam Detection - Naive Bayes</h2>
+    <form method="POST" novalidate>
+      <label for="message">Enter your message:</label>
+      <input
+        type="text"
+        id="message"
+        name="message"
+        required
+        placeholder="Type your message here..."
+        autocomplete="off"
+        value="{{ request.form.message if request.form.message else '' }}"
+      />
+      <div class="buttons">
+        <button type="submit">Predict</button>
+        <button type="button" onclick="document.getElementById('message').value = '';">Clear</button>
+      </div>
+    </form>
+
+    {% if prediction %}
+      <div class="prediction">
+        Prediction:
+        {% if prediction.lower() == "spam" %}
+          <span class="spam-label">{{ prediction }}</span>{% else %}
+          <span class="not-spam-label">{{ prediction }}</span>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
