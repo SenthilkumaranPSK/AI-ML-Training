@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Interest Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #eef2f3, #8e9eab);
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🎬 Predict Movie Interest</h2>
+
+    <div class="form-container">
+        <form action="/predict" method="post" id="prediction-form">
+            <!-- User 1 -->
+            <label for="feature1">👤 Age (User 1):</label>
+            <input type="text" id="feature1" name="feature1" required placeholder="e.g., 25" pattern="^[0-9]+$">
+            <div class="error" id="age1-error"></div>
+
+            <label for="feature2">🚻 Gender (User 1):</label>
+            <input type="text" id="feature2" name="feature2" required placeholder="1 = Male, 0 = Female" pattern="^[01]$">
+            <div class="error" id="gender1-error"></div>
+
+            <!-- User 2 -->
+            <label for="feature3">👤 Age (User 2):</label>
+            <input type="text" id="feature3" name="feature3" required placeholder="e.g., 28" pattern="^[0-9]+$">
+            <div class="error" id="age2-error"></div>
+
+            <label for="feature4">🚻 Gender (User 2):</label>
+            <input type="text" id="feature4" name="feature4" required placeholder="1 = Male, 0 = Female" pattern="^[01]$">
+            <div class="error" id="gender2-error"></div>
+
+            <input type="submit" value="Predict 🎯">
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('#prediction-form').addEventListener('submit', function (event) {
+            let isValid = true;
+
+            let age1 = document.getElementById('feature1').value;
+            let age2 = document.getElementById('feature3').value;
+            if (isNaN(age1) || age1 <= 0) {
+                isValid = false;
+                document.getElementById('age1-error').textContent = 'Enter a valid age for User 1.';
+            } else {
+                document.getElementById('age1-error').textContent = '';
+            }
+
+            if (isNaN(age2) || age2 <= 0) {
+                isValid = false;
+                document.getElementById('age2-error').textContent = 'Enter a valid age for User 2.';
+            } else {
+                document.getElementById('age2-error').textContent = '';
+            }
+
+            let gender1 = document.getElementById('feature2').value;
+            let gender2 = document.getElementById('feature4').value;
+            if (gender1 !== '0' && gender1 !== '1') {
+                isValid = false;
+                document.getElementById('gender1-error').textContent = 'Gender must be 0 or 1 for User 1.';
+            } else {
+                document.getElementById('gender1-error').textContent = '';
+            }
+
+            if (gender2 !== '0' && gender2 !== '1') {
+                isValid = false;
+                document.getElementById('gender2-error').textContent = 'Gender must be 0 or 1 for User 2.';
+            } else {
+                document.getElementById('gender2-error').textContent = '';
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
